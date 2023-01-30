@@ -8,12 +8,20 @@ import (
 	// "errors"
 )
 
-
 // tom: add backticks to json
 type product struct {
 	ID    int     `json:"id"`
 	Name  string  `json:"name"`
 	Price float64 `json:"price"`
+}
+type store struct {
+	Product_id   []int `json:"product_id"`
+	Is_available bool  `json:"is_available"`
+}
+type temp struct {
+	store_id     int  `json:"store_id"`
+	product_id   int  `json:"product_id"`
+	is_available bool `json:"is_available"`
 }
 
 // tom: these are initial empty definitions
@@ -79,7 +87,7 @@ func getProducts(db *sql.DB, start, count int) ([]product, error) {
 	}
 
 	defer rows.Close()
-
+	//fmt.Println(rows)
 	products := []product{}
 
 	for rows.Next() {
